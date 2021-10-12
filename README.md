@@ -1,1 +1,1 @@
-greetings.py
+greetings.py .py
