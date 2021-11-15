@@ -1,3 +1,4 @@
+#!/bin/bash
 page=1
 pulls=0
 # H2=`cat public_repo_token`
