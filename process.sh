@@ -3,7 +3,7 @@ cat $1 | awk -F, '
 END{print "RATING_AVG", x/NR}'
 v=`cat $1 | awk -F, '{split($1, countries, "_"); countries1 = countries[1]; print countries1}' | sort -u | tr ' ' '\n' | sort -u | tr '\n' ' '`
 
-for i in $(v[*])
+for i in $v
 do
     printf "HOTELNUMBER $i " ; cat $1 | awk -F, '{print $1}' | grep -c ^$i
 done
