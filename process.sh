@@ -10,7 +10,7 @@ done
 countrieswithholinn=`cat $1 | grep -E "holiday_inn" `
 countrieswithhilton=`cat $1 | grep -E "hilton" `
 v=`cat $1 | awk -F, '{split($1, countries, "_"); countries1 = countries[1]; print countries1}' | sort -u | tr ' ' '\n' | sort -u | tr '\n' ' '`
-for i in ${v[*]}
+for i in $v
 do
     holinn=`echo "${countrieswithholinn}" | grep -E ^"${i}" | awk -F, '{x+=$12} END{print x/NR}'`
     hilton=`echo "${countrieswithhilton}" | grep -E ^"${i}" | awk -F, '{x+=$12} END{print x/NR}'`
