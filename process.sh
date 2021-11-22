@@ -1,5 +1,5 @@
 cat $1 | awk -F, '
-{if ($18 >=0) x+=$18}
+{if ($18 >=5) x+=$18}
 END{print "RATING_AVG", x/NR}'
 v=`cat $1 | awk -F, '{split($1, countries, "_"); countries1 = countries[1]; print countries1}' | sort -u | tr ' ' '\n' | sort -u | tr '\n' ' '`
 
