@@ -16,6 +16,7 @@ do
     hilton=`echo "${countrieswithhilton}" | grep -E ^"${i}" | awk -F, '{  if($12 > 0) x+=$12; if ($12 > 0) num+=1} END{print x/num}'`
     printf "CLEANLINESS $i $holinn $hilton \n"
 done
+mkdir tmp
 cat hotels.csv | awk -F, '{if($18>=0) print $0}' > tmp/hotels_right.csv
 gnuplot <<- EOF
 set terminal png size 300, 400
