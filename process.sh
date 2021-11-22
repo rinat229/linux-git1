@@ -12,7 +12,7 @@ countrieswithhilton=`cat $1 | grep -E "hilton" `
 v=`cat $1 | awk -F, '{split($1, countries, "_"); countries1 = countries[1]; print countries1}' | sort -u | tr ' ' '\n' | sort -u | tr '\n' ' '`
 for i in $v
 do
-    holinn=`echo "${countrieswithholinn}" | grep -E ^"${i}" | awk -F, '{  x+=$12} END{print x/NR, x}'`
-    hilton=`echo "${countrieswithhilton}" | grep -E ^"${i}" | awk -F, '{  x+=$12} END{print x/NR, x}'`
+    holinn=`echo "${countrieswithholinn}" | grep -E ^"${i}" | awk -F, '{  if($12 > 0) x+=$12; if ($12 > 0) num+=1} END{print x/num}'`
+    hilton=`echo "${countrieswithhilton}" | grep -E ^"${i}" | awk -F, '{  if($12 > 0) x+=$12; if ($12 > 0) num+=1} END{print x/num}'`
     printf "CLEANLINESS $i $holinn $hilton \n"
 done
