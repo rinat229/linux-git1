@@ -16,3 +16,14 @@ do
     hilton=`echo "${countrieswithhilton}" | grep -E ^"${i}" | awk -F, '{  if($12 > 0) x+=$12; if ($12 > 0) num+=1} END{print x/num}'`
     printf "CLEANLINESS $i $holinn $hilton \n"
 done
+
+gnuplot <<- EOF
+set terminal png size 300, 400
+set output 'c_vs_o.png'
+set datafile separator comma
+plot 'hotels.csv' using 12:18 title 'clean_vs_overall' with points
+f(x)=m*x+b
+fit f(x) 'hotels.csv' using 12:18 via m,b
+set output 'c_vs_o.png' 
+plot 'hotels.csv' using 12:18 title 'cleaafsf' with points, f(x) title 'fit'
+EOF
