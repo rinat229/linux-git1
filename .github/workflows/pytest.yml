@@ -1,25 +1,17 @@
-name: CI
-on:
-  push:
-    branches: [main, development]
-  pull_request:
-    branches: [main, development]
+name: pytest
+on: push
 jobs:
   build:
     strategy:
       matrix:
-        python-version: [3.8.6]
+        python-version: [3.9.9]
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          
-      - name: Switch to Current Branch
-        run: git checkout ${{ env.BRANCH }}
               
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
@@ -29,11 +21,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          cd key_generator/source
-          pip install -r requirements-dev.txt
+          pip install -r requirements.txt
           pip install -e .
       - name: Run unit tests
         run: |
-          cd key_generator/scripts
-          chmod +x run_tests.sh
-          ./run_tests.sh
+          pytest ./project/funct/test_functions.py
