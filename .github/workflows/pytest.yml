@@ -23,4 +23,4 @@ jobs:
 #         pip install -e .
       - name: Run unit tests
         run: |
-          pytest ./project/funct/test_functions.py
+          pytest --verbose
